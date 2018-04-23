@@ -1,0 +1,77 @@
+﻿@model Example.Models.OrdersModel 
+<table summary="Personal Movie Rating" class="myTable">
+    <thead>
+        <tr>
+            <th scope="col" class="myHeader">
+                Start Date:
+            </th>
+            <th scope="col" class="myHeader">
+                End Date:
+            </th>
+            <th scope="col" class="myHeader">
+                Get Results:
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="myCell">
+                @(Html.DevExpress().DateEdit(settings => {
+                settings.Name = "StartDate";
+
+                settings.Properties.MinDate = Model.MinDate;
+                settings.Properties.MaxDate = Model.MaxDate;
+
+                settings.Properties.Width = Unit.Percentage(100);
+            })
+               .Bind(Model.StartDate)
+               .GetHtml())
+            </td>
+            <td class="myCell">
+                @(Html.DevExpress().DateEdit(settings => {
+                settings.Name = "EndDate";
+
+                settings.Properties.MinDate = Model.MinDate;
+                settings.Properties.MaxDate = Model.MaxDate;
+
+                settings.Properties.Width = Unit.Percentage(100);
+
+                settings.Properties.ValidationSettings.EnableCustomValidation = true;
+                settings.Properties.ValidationSettings.Display = Display.Dynamic;
+                settings.Properties.ClientSideEvents.Validation = "function (s, e) { e.isValid = e.value >= StartDate.GetValue(); e.errorText = 'The End Date value is less than the Start Date'; }";
+            })
+               .Bind(Model.EndDate)
+               .GetHtml())
+            </td>
+            <td class="myCell">
+                @(Html.DevExpress().Button(settings => {
+                settings.Name = "btn";
+                settings.Text = "Apply";
+                settings.Width = Unit.Percentage(100);
+
+                settings.CausesValidation = true;
+
+                settings.ClientSideEvents.Click = @"function (s, e) {
+                                                        if (!ASPxClientEdit.ValidateGroup (''))
+                                                            return;
+
+                                                        startDate = StartDate.GetDate();
+                                                        endDate = EndDate.GetDate();
+
+                                                        gridView.Refresh();
+                                                    }";
+            })
+                .GetHtml())
+            </td>
+        </tr>
+        <tr>
+            <td class="myGridCell" colspan="3">
+                @Html.Partial("_GridView", Model.Data)
+            </td>
+        </tr>
+    </tbody>
+</table>
+<script type="text/javascript">
+    var startDate = StartDate.GetDate(),
+        endDate = EndDate.GetDate();
+</script>
