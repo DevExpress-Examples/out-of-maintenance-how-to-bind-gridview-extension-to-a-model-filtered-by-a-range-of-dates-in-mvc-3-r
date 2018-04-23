@@ -1,0 +1,22 @@
+@model Example.Models.Northwind.OrdersDataTable
+@using System.Drawing
+@Html.DevExpress().GridView(settings => {
+    settings.Name = "gridView";
+    settings.KeyFieldName = "OrderID";
+
+    settings.Columns.Add("OrderID", MVCxGridViewColumnType.TextBox);
+    settings.Columns.Add("OrderDate", MVCxGridViewColumnType.DateEdit).CellStyle.BackColor = Color.Yellow;
+    settings.Columns.Add("Freight", MVCxGridViewColumnType.TextBox);
+    settings.Columns.Add("ShipName", MVCxGridViewColumnType.TextBox);
+
+    settings.CallbackRouteValues = new { Controller = "Home", Action = "GridViewPartial" };
+
+    settings.Width = Unit.Percentage(100);
+
+    settings.ClientSideEvents.BeginCallback = @"function (s, e) {                                                    
+                                                    e.customArgs['StartDate'] = startDate.getDate() + '|' + (startDate.getMonth() + 1) + '|' + startDate.getFullYear();
+                                                    e.customArgs['EndDate'] = endDate.getDate() + '|' + (endDate.getMonth() + 1) + '|' + endDate.getFullYear();
+                                                }";
+
+    settings.SettingsPager.ShowEmptyDataRows = true;
+}).Bind(Model).GetHtml()
