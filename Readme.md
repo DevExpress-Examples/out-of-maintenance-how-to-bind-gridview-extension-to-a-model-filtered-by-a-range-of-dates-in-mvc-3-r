@@ -1,3 +1,11 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [HomeController.cs](./CS/Controllers/HomeController.cs) (VB: [HomeController.vb](./VB/Controllers/HomeController.vb))
+* [_GridView.cshtml](./CS/Views/Home/_GridView.cshtml)
+* [Index.cshtml](./CS/Views/Home/Index.cshtml)
+* [_Layout.cshtml](./CS/Views/Shared/_Layout.cshtml)
+<!-- default file list end -->
 # How to bind GridView extension to a Model filtered by a range of dates in MVC 3 (Razor)
 
 
