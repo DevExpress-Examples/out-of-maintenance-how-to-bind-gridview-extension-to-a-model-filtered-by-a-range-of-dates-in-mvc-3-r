@@ -7,6 +7,9 @@
 * [_Layout.cshtml](./CS/Views/Shared/_Layout.cshtml)
 <!-- default file list end -->
 # How to bind GridView extension to a Model filtered by a range of dates in MVC 3 (Razor)
+<!-- run online -->
+**[[Run Online]](https://codecentral.devexpress.com/e3096)**
+<!-- run online end -->
 
 
 <p>The example covers the following topics:<br />
